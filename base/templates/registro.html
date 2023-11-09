@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-7">
+                    <div class="p-5 ">                        
+                        {% block menssages %}
+                            {% if messages %}
+                            <div class="alert alert-success mt-3">
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}   
+                        {% endblock %}                      
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Criar Conta</h1>
+                        </div>
+                        <form method="POST" class="user">
+                            {% csrf_token %}
+                            <div class="form-group row justify-content-center">
+                                <div class="col-sm-6">                                                                 
+                                    {{form.username}}   
+                                </div>                                 
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    {{form.first_name}}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{form.last_name}}
+                                </div>                                    
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    {{form.password1}}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{form.password2}}                                    
+                                </div>                                
+                            </div>
+                            <input class="btn btn-primary btn-user btn-block" type="submit" value="Registrar Conta">
+                        </form>
+                        <hr>
+                    </div>                                       
+                    <div class="alert-danger alert-sm">                 
+                        {% if form.errors %}
+                        <ul class="errorlist">
+                          {% for field in form %}
+                            {% if field.errors %}
+                              <li>{{ field.errors }}</li>
+                            {% endif %}
+                          {% endfor %}
+                        </ul>
+                      {% endif %}                       
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+{% endblock %}

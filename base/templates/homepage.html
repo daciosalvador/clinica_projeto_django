@@ -1,0 +1,102 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'status.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Últimas 5 Consultas</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body table-responsive">
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Médico</th>
+                            <th>Paciente</th>
+                            <th>Data Consulta</th>
+                            <th>Horário</th>
+                            <th>Status</th>
+                            <th>Atulizar</th>
+                            <th>Remover</th>
+                        </tr>
+                        {% for consulta in ultimas_consultas %}
+                            <tr>
+                                <td>{{consulta.medico}}</td>
+                                <td>{{consulta.paciente}}</td>
+                                <td>{{consulta.dia|date:"d/m/Y"|default:"---"}}</td>
+                                <td>{{consulta.hora|time:"H:i:s"|default:"---"}}</td>
+                                <td>{{consulta.status}}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'att-consulta' consulta.id %}">Atualizar</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'remover-consulta' consulta.id %}">Remover</a></td>  
+                            </tr>
+                            
+                        {% endfor %}
+                    </table>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Pacientes</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <th></th>
+                            <th>Paciente</th>
+                            <th>Telefone</th>
+                        </tr>
+                        {% for paciente in ultimas_pacientes %}
+                            <tr>                                    
+                                <td><a class="btn btn-sm btn-info" href="{% url 'paciente' paciente.nome %}">View</a></td>
+                                <td>{{paciente.nome}}</td>
+                                <td>{{paciente.telefone_formatado}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+
+{% endblock %}

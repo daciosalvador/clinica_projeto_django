@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+<br>
+<div class="col">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-body">
+                <h5 class="d-flex justify-content-center">Remover Consulta</h5>   
+                <p>Certeza que deseja excluir consulta com Dr(a) "{{item}}"?</p>
+                <form action="{% url 'remover-consulta' item.id %}" method="POST">
+    
+                    {% csrf_token %}
+                    <a class="btn btn-secondary"" href="{% url 'home' %}">Cancelar</a>
+                    <input class="btn btn-danger" type="submit" name="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

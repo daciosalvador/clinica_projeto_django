@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-body">
+                <h5 class="d-flex justify-content-center">Atualizar Paciente</h5>     
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input class="btn btn-primary" type="submit" name="Submit">
+                    <a class="btn btn-warning" href="{% url 'home' %}">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

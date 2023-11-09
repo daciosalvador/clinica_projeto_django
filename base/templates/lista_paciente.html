@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tabela de Clientes</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>                                    
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paciente in pacientes %}
+                        <tr>
+                            <td>{{paciente.nome}}</td>
+                            <td>{{paciente.cpf_formatado}}</td>
+                            <td>{{paciente.email}}</td>
+                            <td>{{paciente.telefone_formatado}}</td>
+                            <td><a class="btn btn-sm btn-info" href="{% url 'paciente' paciente.nome %}">View</a></td>
+                        {% endfor %}                                     
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+{% endblock content %}
